@@ -158,6 +158,8 @@ var (
 			// See https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=2066865
 			`\[sig-storage\] In-tree Volumes \[Driver: azure-disk\] \[Testpattern: Dynamic PV \(immediate binding\)\] topology should provision a volume and schedule a pod with AllowedTopologies`,
 			`\[sig-storage\] In-tree Volumes \[Driver: azure-disk\] \[Testpattern: Dynamic PV \(delayed binding\)\] topology should provision a volume and schedule a pod with AllowedTopologies`,
+			// Azure offline expansion won't work when the driver is disabled (in TechPreviewNoUpgrade) clusters.
+			`\[sig-storage]\ In-tree Volumes \[Driver: azure-file\] \[Testpattern: Dynamic PV \(default fs\)\(allowExpansion\)\] volume-expand Verify if offline PVC expansion works`,
 		},
 		"[Skipped:gce]": {
 			// Requires creation of a different compute instance in a different zone and is not compatible with volumeBindingMode of WaitForFirstConsumer which we use in 4.x
