@@ -9,8 +9,6 @@ import (
 	"github.com/openshift/origin/pkg/monitor"
 	"github.com/openshift/origin/pkg/monitor/backenddisruption"
 	"github.com/openshift/origin/pkg/monitor/monitorapi"
-	"github.com/openshift/origin/pkg/synthetictests/allowedbackenddisruption"
-	"github.com/openshift/origin/pkg/synthetictests/platformidentification"
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/tools/events"
 	"k8s.io/kubernetes/test/e2e/framework"
@@ -89,14 +87,8 @@ func alwaysAllowOneSecond(delegateFn AllowedDisruptionFunc) AllowedDisruptionFun
 }
 
 func (t *backendDisruptionTest) historicalAllowedDisruption(f *framework.Framework) (*time.Duration, string, error) {
-	backendName := t.backend.GetDisruptionBackendName() + "-" + string(t.backend.GetConnectionType()) + "-connections"
-	jobType, err := platformidentification.GetJobType(context.TODO(), f.ClientConfig())
-	if err != nil {
-		return nil, "", err
-	}
-	framework.Logf("checking allowed disruption for job type: %+v", *jobType)
-
-	return allowedbackenddisruption.GetAllowedDisruption(backendName, *jobType)
+	zero := time.Duration(0)
+	return &zero, "", nil
 }
 
 // returns allowedDuration, detailsString(for display), error
